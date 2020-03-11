@@ -4,7 +4,7 @@
     "autoConnectDB": true,
     "dbDriver": "postgres",
     "host": "localhost",
-    "port": 5433,
+    "port": 5432,
     "database": "core_ili_v1",
     "prefix": "core",
     "user": "core_ili_admin",
