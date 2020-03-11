@@ -4,7 +4,7 @@
   "description": "Core Item Link Item",
   "private": true,
   "scripts": {
-    "start": "node src/core-ili/core-ili.js"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",

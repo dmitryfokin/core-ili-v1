@@ -1,31 +1,62 @@
+const CoreILIDBPG = require('./db/core-ili-db-postgres')
+
 class CoreILI {
-  constructor(options) {
-    this.options = options
+  constructor() {
+    this.options = {}
     this.connected = false
     this.db = null
-
-
-    if (options.autoConnect || true) {
-      try {
-        this.connectDB()
-        this.connected = true
-      } catch (error) {
-        this.connected = false
-      }
-    }
   }
 
-  connectDB() {
-    if (this.options.dbConfig.dbDriver === 'postgres') {
-      this.db = require('./db/core-ili-db-postgres').open(this.options)
+  async connect(options) {
+    this.options = options
 
+    if (this.options.dbDriver === 'postgres') {
+      this.db = CoreILIDBPG.open(this.options)
 
+      try {
+        await this.db.connect()
+      } catch (err) {
+        throw 'Ошибка БД: ' + err
+      }
     } else {
       throw 'Поддерживается, только, PostgreSQL база данных'
     }
   }
+
+  use() {
+    console.log('core-ili use()')
+  }
+
+  // TODO: определить функцию заполнения параметров
+  defineParameters(options) {
+  }
 }
 
+module.exports = new CoreILI
 
-
+// connect(options) {
+//   this.options = options
+//
+//   if (this.options.dbDriver === 'postgres') {
+//     new Promise((resolve, reject) => {
+//       try {
+//         ;(async () => {
+//           this.db = CoreILIDBPG.open(this.options)
+//         })()
+//         resolve()
+//       } catch (err) {
+//         reject(err)
+//       }
+//     })
+//       .then(() => {
+//         this.connected = true
+//       })
+//       .catch((err) => {
+//         this.connected = false
+//         throw 'Ошибка БД: ' + err
+//       })
+//   } else {
+//     throw 'Поддерживается, только, PostgreSQL база данных'
+//   }
+// }
 
