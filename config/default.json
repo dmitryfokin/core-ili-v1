@@ -3,10 +3,10 @@
   "dbConfig": {
     "autoConnectDB": true,
     "dbDriver": "postgres",
+    "prefix": "app",
     "host": "localhost",
     "port": 5432,
     "database": "core_ili_v1",
-    "prefix": "core",
     "user": "core_ili_admin",
     "password": "123",
     "max": 10,
