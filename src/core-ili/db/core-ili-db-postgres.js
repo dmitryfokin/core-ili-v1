@@ -9,37 +9,49 @@ class CoreILIDBPG {
         table: (this.prefix + '_ili_types_item'),
         columns: [
           {name: 'id', type: 'uuid'},
-          {name: 'name', type: 'String'},
+          {name: 'key', type: 'String'},
           {name: 'description', type: 'String'},
+          {name: 'createdAt', type: 'Date'},
+          {name: 'updatedAt', type: 'Date'},
         ]
       },
       TypeLink: {
         table: (this.prefix + '_ili_types_link'),
         columns: [
           {name: 'id', type: 'uuid'},
-          {name: 'name', type: 'String'},
+          {name: 'key', type: 'String'},
           {name: 'description', type: 'String'},
+          {name: 'createdAt', type: 'Date'},
+          {name: 'updatedAt', type: 'Date'},
         ]
       },
       Item: {
         table: (this.prefix + '_ili_items'),
         columns: [
           {name: 'id', type: 'uuid'},
-          {name: 'name', type: 'String'},
+          {name: 'key', type: 'String'},
           {name: 'description', type: 'String'},
+          {name: 'params', type: 'json'},
           {name: 'id_type_item', type: 'uuid'},
+          {name: 'id_link', type: 'uuid'},
+          {name: 'createdAt', type: 'Date'},
+          {name: 'updatedAt', type: 'Date'},
         ]
       },
       Link: {
         table: (this.prefix + '_ili_links'),
         columns: [
           {name: 'id', type: 'uuid'},
-          {name: 'name', type: 'String'},
+          {name: 'key', type: 'String'},
           {name: 'description', type: 'String'},
           {name: 'id_item', type: 'uuid'},
           {name: 'id_item_1', type: 'uuid'},
+          {name: 'id_type_item_1', type: 'uuid'},
           {name: 'id_item_2', type: 'uuid'},
+          {name: 'id_type_item_2', type: 'uuid'},
           {name: 'id_type_link', type: 'uuid'},
+          {name: 'createdAt', type: 'Date'},
+          {name: 'updatedAt', type: 'Date'},
         ]
       },
     }
@@ -76,9 +88,9 @@ class CoreILIDBPG {
 
   async execute(scriptDB) {
     console.log(scriptDB)
-    const client = await this.pool.connect()
-
     try {
+      const client = await this.pool.connect()
+
       scriptDB.forEach(queue => {
         queue.forEach(record => {
 

@@ -3,11 +3,9 @@ const CoreILIDBPG = require('./db/core-ili-db-postgres')
 class CoreILI {
 
   constructor() {
-
     this.options = {}
     this.connected = false
     this.db = null
-
   }
 
   async connect(options) {
@@ -19,10 +17,10 @@ class CoreILI {
       try {
         await this.db.connect()
       } catch (err) {
-        throw 'Ошибка БД: ' + err
+        throw new Error('Ошибка БД: ' + err)
       }
     } else {
-      throw 'Поддерживается, только, PostgreSQL база данных'
+      throw new Error('Поддерживается, только, PostgreSQL база данных')
     }
   }
 
